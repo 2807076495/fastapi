@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+	<link rel="stylesheet" href="static/layui/css/layui.css">
+	<link rel="stylesheet" href="static/home/css/global.css">
+</head>
+<body>
+
+<div class="layui-main homepage">
+        <section>
+            <div class="nav nav-tree">
+                <div class="nav-header">
+                    <a href="javascript:;">全部分类</a>
+                </div>
+                <ul class="nav-body">
+                    <li class="nav-item">
+                        <a href="javascript:;">常用/金融/加油</a>
+                        <dl class="nav-child">
+                            <div class="subtitle">常用工具</div>
+                            <div><a href="">移动模块</a><a href="">后台模版</a><a href="">电商平台</a></div>
+                            <div class="subtitle">金融工具</div>
+                            <div><a href="">移动模块</a><a href="">后台模版</a><a href="">电商平台</a></div>
+                            <div class="subtitle">加油卡</div>
+                            <div><a href="">移动模块</a><a href="">后台模版</a><a href="">电商平台</a></div>
+                        </dl>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:;">解决方案</a>
+                        <dl class="nav-child">
+                            <div class="subtitle">常用工具</div>
+                            <div><a href="">移动模块</a><a href="">后台模版</a><a href="">电商平台</a></div>
+                            <div class="subtitle">金融工具</div>
+                            <div><a href="">移动模块</a><a href="">后台模版</a><a href="">电商平台</a></div>
+                            <div class="subtitle">加油卡</div>
+                            <div><a href="">移动模块</a><a href="">后台模版</a><a href="">电商平台</a></div>
+                        </dl>
+                    </li>
+                    <li class="nav-item"><a href="">产品</a></li>
+                    <li class="nav-item"><a href="">大数据</a></li>
+                </ul>
+            </div>
+            <div class="advertise">
+                <div class="layui-carousel" id="advertise">
+                    <div carousel-item>
+                        <div class="">条目1</div>
+                        <div class="">条目2</div>
+                        <div class="">条目3</div>
+                        <div class="">条目4</div>
+                        <div class="">条目5</div>
+                    </div>
+                </div>
+                <div class="layui-row qa">
+                    <div class="layui-col-xs4">
+                        <img src="static/home/images/123.png">
+                    </div>
+                    <div class="layui-col-xs4">
+                        <img src="static/home/images/123.png">
+                    </div>
+                    <div class="layui-col-xs4">
+                        <img src="static/home/images/123.png">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category">
+            <div class="title">热门工具</div>
+            <div class="layui-row">
+                <div class="layui-col-xs3">
+                    <div class="adv">
+                        <img src="static/home/images/adv1.jpg">
+                    </div>
+                </div>
+                <div class="layui-col-xs9" style="padding: 0 10px">
+                    <div class="layui-row">
+                        <div class="layui-col-xs4">
+                            <div class="production">
+                                <img src="static/home/images/product_1.jpg">
+                                <h4>充电桩</h4>
+                                <p>在线充电桩充值接口</p>
+                                <p class="price">免费</p>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs4">
+                            <div class="production">
+                                <img src="static/home/images/product_1.jpg">
+                                <h4>充电桩</h4>
+                                <p>在线充电桩充值接口</p>
+                                <p class="price">免费</p>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs4">
+                            <div class="production">
+                                <img src="static/home/images/product_1.jpg">
+                                <h4>充电桩</h4>
+                                <p>在线充电桩充值接口</p>
+                                <p class="price">免费</p>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs4">
+                            <div class="production">
+                                <img src="static/home/images/product_1.jpg">
+                                <h4>充电桩</h4>
+                                <p>在线充电桩充值接口</p>
+                                <p class="price">免费</p>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs4">
+                            <div class="production">
+                                <img src="static/home/images/product_1.jpg">
+                                <h4>充电桩</h4>
+                                <p>在线充电桩充值接口</p>
+                                <p class="price">免费</p>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs4">
+                            <div class="production">
+                                <img src="static/home/images/product_1.jpg">
+                                <h4>充电桩</h4>
+                                <p>在线充电桩充值接口</p>
+                                <p class="price">免费</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+	<script type="text/javascript" src="static/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: 'static/home/',
+        version: '20171115001'
+    }).use('global');
+	layui.use(['carousel', 'element'], function(){
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#advertise'
+                ,width: '100%' //设置容器宽度
+                ,arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });
+        });
+</script>
+</body>
+</html>
