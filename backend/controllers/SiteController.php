@@ -1,8 +1,10 @@
 <?php
 namespace backend\controllers;
 
+use common\components\JsonEncoder;
 use common\models\User;
 use Yii;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -54,6 +56,10 @@ class SiteController extends Controller
         ];
     }
 
+    public function showError($msg){
+
+    }
+
     /**
      * Displays homepage.
      *
@@ -61,7 +67,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if (Yii::$app->user->isGuest) {
+            return JsonEncoder::response(JsonEncoder::STATUS_UNLOGIN, '请先登录');
+        }
+        return JsonEncoder::response();
     }
 
     /**
@@ -72,21 +81,17 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $params = Yii::$app->request->post();
-        $params['username'] = 'ppzhu';
-        $params['password'] = md5('12345678');
-
+        /*$params['username'] = 'ppzhu';
+        $params['password_hash'] = md5('12345678');*/
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         $model = new LoginForm();
-        if ($model->load($params,'') && $model->login()) {  //Yii::$app->request->post()
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+        $model->load($params,'');
+        if (!$model->login()) {
+            return JsonEncoder::response(JsonEncoder::STATUS_FAIL, $model->getFirstErrors());
         }
+        return JsonEncoder::response();
     }
 
     /**
