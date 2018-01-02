@@ -8,6 +8,7 @@ use backend\models\myproducts\SearchMyProducts;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\components\JsonEncoder;
 
 /**
  * MyProductsController implements the CRUD actions for MyProducts model.
@@ -38,10 +39,7 @@ class MyProductsController extends Controller
         $searchModel = new SearchMyProducts();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return JsonEncoder::response(JsonEncoder::STATUS_SUCCESS,'',$dataProvider);
     }
 
     /**
@@ -51,9 +49,7 @@ class MyProductsController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return JsonEncoder::response(JsonEncoder::STATUS_SUCCESS,'',$this->findModel($id));
     }
 
     /**
@@ -66,11 +62,9 @@ class MyProductsController extends Controller
         $model = new MyProducts();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return JsonEncoder::response();
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            return JsonEncoder::response(JsonEncoder::STATUS_FAIL,$model->getFirstErrors());
         }
     }
 
@@ -85,11 +79,9 @@ class MyProductsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return JsonEncoder::response();
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            return JsonEncoder::response(JsonEncoder::STATUS_FAIL,$model->getFirstErrors());
         }
     }
 
@@ -103,7 +95,7 @@ class MyProductsController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return JsonEncoder::response();
     }
 
     /**
