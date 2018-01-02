@@ -40,8 +40,7 @@ class ProductsController extends Controller
         $searchModel = new SearchProducts();
         $dataProvider = $searchModel->search($params);
 //        $models = $dataProvider->getModels();
-        return JsonEncoder::response(JsonEncoder::STATUS_SUCCESS);
-//        return JsonEncoder::response(JsonEncoder::STATUS_SUCCESS,'',$dataProvider);
+        return JsonEncoder::response(JsonEncoder::STATUS_SUCCESS,'',$dataProvider);
     }
 
     /**
