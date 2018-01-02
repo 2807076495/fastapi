@@ -8,6 +8,7 @@ use backend\models\packages\SearchPackages;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\components\JsonEncoder;
 
 /**
  * PackagesController implements the CRUD actions for Packages model.
@@ -37,11 +38,11 @@ class PackagesController extends Controller
     {
         $searchModel = new SearchPackages();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
+        return JsonEncoder::response(JsonEncoder::STATUS_SUCCESS,'',$dataProvider);
+        /*return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
+        ]);*/
     }
 
     /**
@@ -51,9 +52,10 @@ class PackagesController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return JsonEncoder::response(JsonEncoder::STATUS_SUCCESS,'',$this->findModel($id));
+        /*return $this->render('view', [
             'model' => $this->findModel($id),
-        ]);
+        ]);*/
     }
 
     /**
@@ -66,11 +68,9 @@ class PackagesController extends Controller
         $model = new Packages();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return JsonEncoder::response();
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            return JsonEncoder::response(JsonEncoder::STATUS_FAIL,$model->getFirstErrors());
         }
     }
 
@@ -85,11 +85,9 @@ class PackagesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return JsonEncoder::response();
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            return JsonEncoder::response(JsonEncoder::STATUS_FAIL,$model->getFirstErrors());
         }
     }
 
@@ -103,7 +101,7 @@ class PackagesController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return JsonEncoder::response();
     }
 
     /**
